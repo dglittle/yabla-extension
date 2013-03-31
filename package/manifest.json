@@ -1,0 +1,18 @@
+{
+    "name": "Yabla Extension",
+    "version": "1.0",
+    "manifest_version": 2,
+    "permissions": [
+        "http://spanish.yabla.com/player_cdn.php*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "http://spanish.yabla.com/player_cdn.php*"
+            ],
+            "js": [
+                "js/content.js"
+            ]
+        }
+    ]
+}
