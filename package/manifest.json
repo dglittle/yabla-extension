@@ -2,17 +2,21 @@
     "name": "Yabla Extension",
     "version": "1.0",
     "manifest_version": 2,
+    "page_action": {
+        "default_icon": "img/icon.png",
+        "default_title": "Yabla Extension"
+    },
+    "content_scripts": [{
+        "matches": ["*://spanish.yabla.com/player_cdn.php*"],
+        "js": ["js/content.js"],
+        "css": ["css/styles.css"]
+    }],
     "permissions": [
-        "http://spanish.yabla.com/player_cdn.php*"
+        "tabs",
+        "*://spanish.yabla.com/player_cdn.php*"
     ],
-    "content_scripts": [
-        {
-            "matches": [
-                "http://spanish.yabla.com/player_cdn.php*"
-            ],
-            "js": [
-                "js/content.js"
-            ]
-        }
-    ]
+    "background": {
+        "scripts": ["js/background.js"]
+    },
+    "web_accessible_resources": ["js/scripts.js"]
 }
