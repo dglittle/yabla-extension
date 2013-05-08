@@ -1,0 +1,29 @@
+.wrap .transcript.text .word {
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+.wrap .transcript.text {
+    vertical-align: top;
+}
+
+.wrap .transcript.text .translate {
+    color: #ff0000;
+    font-size: 90%;
+    position: absolute;
+}
+
+.wrap .transcript.text .translate span {
+    display: inline-block;
+    position: relative;
+}
+
+#captions .text .word.active {
+    opacity: 0.6;
+}
+
+#captions .wrap {
+    height: auto !important;
+    min-height: 75px;
+}
