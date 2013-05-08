@@ -1,3 +1,6 @@
+var enabledYablaExtension = true;
+var currentCaptionIndex = -1;
+
 $().ready(function() {
     if (typeof(Application) !== 'undefined') {          // check created object Application
         if (Application.opts.media_lang_id == "es" && Application.opts.translation_lang_id == "en") {       // check languages
@@ -8,6 +11,10 @@ $().ready(function() {
 
 function addTranslation(e, d) {
     var ind = d.caption_index;
+    currentCaptionIndex = d;
+    if (!enabledYablaExtension) {
+        return;
+    }
     if(ind !== null && ind !== undefined) {
         var words = Application.vc.captions[ind].transcript_words;          // get current line words
         var translatedWords = [];
@@ -86,3 +93,11 @@ function alignWords() {
     }
 }
 
+function setEnabledExtension(en) {
+    enabledYablaExtension = en;
+    if (enabledYablaExtension) {
+        addTranslation(0, currentCaptionIndex);
+    } else {
+        $(".wrap .transcript.text .translate").remove();
+    }
+}
