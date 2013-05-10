@@ -9,7 +9,10 @@ s.onload = function() {
 
 // switch on/off extension:
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-    var actualCode = ['setEnabledExtension(' + request.enabled.toString() + ')'].join('\n');
+    var actualCode = [
+        'if (window.setEnabledExtension) {',
+        '   setEnabledExtension(' + request.enabled.toString() + ')',
+        '}'].join('\n');
 
     var script = document.createElement('script');
     script.textContent = actualCode;

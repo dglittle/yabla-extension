@@ -6,8 +6,23 @@ $().ready(function() {
         if (Application.opts.media_lang_id == "es" && Application.opts.translation_lang_id == "en") {       // check languages
             Application.vc.bind('captionchange', addTranslation);           // listen event 'captionchange'
         }
+    } else {
+        if (getCookie('no_html5') == '1') {
+            return;
+        }
+        var date = new Date();
+        date.setDate(date.getDate() + 365*20);
+        document.cookie = 'h264_capable=1; expires=' + date.toUTCString() + '; path=/';
+        location.reload();
     }
 })
+
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
 
 function addTranslation(e, d) {
     var ind = d.caption_index;
@@ -94,6 +109,9 @@ function alignWords() {
 }
 
 function setEnabledExtension(en) {
+    if (typeof(Application) === 'undefined') {
+        return;
+    }
     enabledYablaExtension = en;
     if (enabledYablaExtension) {
         addTranslation(0, currentCaptionIndex);
