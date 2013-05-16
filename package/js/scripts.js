@@ -58,7 +58,14 @@ function addTranslation(e, d) {
 }
 
 function parseTranslation(text, word) {
-    var res = text.match(/<p class=.*?<\/span><br><b>.*?<\/b>.*?<br>(.+?)\s*<br>/i);
+    var res = text.match(new RegExp('<b>'+word+'<\\/b>.*?<br>(.+?)\\s*<br>', 'i'));
+    if (res && res[1])
+    {
+       res = res[1].split(/[,;]/)[0];
+       return res;
+    }
+    
+    res = text.match(/<p class=.*?<\/span><br><b>.*?<\/b>.*?<br>(.+?)\s*<br>/i);
     if (res && res[1]) {
         res = res[1].split(/[,;]/)[0];
     } else {
